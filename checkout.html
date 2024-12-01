@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularz zakupu</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.5/jquery.validate.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Formularz zakupu</h1>
+    </header>
+    <main>
+        <form id="order-form">
+            <div>
+                <label for="name">Imie i nazwisko</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="phone">Numer telefonu</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div>
+                <label for="payment">Metoda platnosci</label>
+                <select id="payment" name="payment" required>
+                    <option value="">-- Wybierz --</option>
+                    <option value="card">Karta kredytowa</option>
+                    <option value="transfer">Przelew bankowy</option>
+                </select>
+            </div>
+            <button type="submit">Zloz zamowienie</button>
+        </form>
+    </main>
+    <footer>
+        <p>Galeria dywanow</p>
+    </footer>
+    <script>
+        $(document).ready(function() {
+            $("#order-form").validate({
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 3
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    phone: {
+                        required: true,
+                        minlength: 9
+                    },
+                    payment: {
+                        required: true
+                    }
+                },
+                messages: {
+                    name: {
+                        required: "Podaj swoje imie i nazwisko",
+                        minlength: "Imie i nazwisko musi miec co najmniej 3 znaki"
+                    },
+                    email: {
+                        required: "Podaj swoj e-mail",
+                        email: "Podaj prawidlowy adres e-mail"
+                    },
+                    address: {
+                        required: "Podaj swoj adres",
+                        minlength: "Adres musi miec co najmniej 10 znakow"
+                    },
+                    payment: {
+                        required: "Wybierz metode platnosci"
+                    }
+                },
+                submitHandler: function(form) {
+                    alert("Formularz przeslany pomyslnie!");
+                    form.reset();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
